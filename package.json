@@ -1,0 +1,26 @@
+{
+  "name": "gentleai-portfolio",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Portafolio profesional web - Vanima",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.2.0",
+    "@astrojs/mdx": "^4.0.0",
+    "@astrojs/tailwind": "^6.0.0",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.7.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
