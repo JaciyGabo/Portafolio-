@@ -1,0 +1,87 @@
+---
+---
+
+<section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+  <!-- Background Elements -->
+  <div class="absolute inset-0 pointer-events-none">
+    <!-- Geometric pattern overlay -->
+    <div class="absolute inset-0 opacity-30"
+      style="background-image: radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+                            radial-gradient(circle at 80% 50%, rgba(0, 212, 255, 0.15) 0%, transparent 40%);">
+    </div>
+    
+    <!-- Floating pixel elements -->
+    <div class="absolute top-20 left-10 w-2 h-2 bg-electric-400 animate-float opacity-60"></div>
+    <div class="absolute top-40 right-20 w-3 h-3 bg-tech-400 animate-float opacity-40" style="animation-delay: 1s;"></div>
+    <div class="absolute bottom-40 left-1/4 w-2 h-2 bg-electric-300 animate-float opacity-50" style="animation-delay: 2s;"></div>
+  </div>
+  
+  <div class="container-custom relative z-10 text-center">
+    <div class="max-w-4xl mx-auto">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-dark-800 border border-dark-600 pixel-corner">
+        <span class="w-2 h-2 bg-electric-400 rounded-full animate-glow-pulse"></span>
+        <span class="text-sm text-gray-400 font-mono">Disponible para proyectos</span>
+      </div>
+      
+      <!-- Title -->
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+        <span class="block text-gray-100">Estudiante de Ingeniería</span>
+        <span class="block mt-2 bg-gradient-to-r from-electric-400 via-tech-400 to-electric-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-pulse">
+          en Desarrollo de Software
+        </span>
+      </h1>
+      
+      <!-- Subtitle -->
+      <p class="text-xl md:text-2xl text-gray-400 mb-4 max-w-2xl mx-auto">
+        con enfoque en
+        <span class="text-electric-400 font-semibold">Inteligencia Artificial</span>
+        y
+        <span class="text-tech-400 font-semibold">DevOps</span>
+      </p>
+      
+      <!-- Company intro -->
+      <div class="mt-8 p-6 bg-dark-800/50 rounded-xl border border-dark-600 max-w-2xl mx-auto">
+        <p class="text-lg text-gray-300">
+          <span class="text-electric-400 font-semibold">Vanima</span> es mi empresa de desarrollo,
+          donde transformo ideas en soluciones tecnológicas robustas y escalables.
+        </p>
+      </div>
+      
+      <!-- CTA Buttons -->
+      <div class="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/proyectos" class="btn-primary inline-flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+          </svg>
+          Ver Proyectos
+        </a>
+        <a href="/contacto" class="btn-secondary inline-flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Contactar
+        </a>
+      </div>
+      
+      <!-- Tech Stack Hint -->
+      <div class="mt-16">
+        <p class="text-sm text-gray-500 mb-4">Stack tecnológico</p>
+        <div class="flex flex-wrap justify-center gap-3">
+          {['TypeScript', 'Python', 'React', 'Astro', 'Docker', 'AWS', 'PostgreSQL', 'Kubernetes'].map((tech) => (
+            <span class="px-3 py-1 text-sm font-mono text-gray-400 bg-dark-800 rounded border border-dark-600">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+    <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+    </svg>
+  </div>
+</section>

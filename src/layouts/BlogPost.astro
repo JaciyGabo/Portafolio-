@@ -1,0 +1,98 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  pubDate: Date;
+  tags?: string[];
+  prevPost?: { title: string; slug: string } | null;
+  nextPost?: { title: string; slug: string } | null;
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  tags = [],
+  prevPost,
+  nextPost,
+} = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString('es-ES', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <!-- Header -->
+    <header class="mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-electric-400 to-tech-400 bg-clip-text text-transparent">
+        {title}
+      </h1>
+      
+      <div class="flex flex-wrap items-center gap-4 text-gray-400 mb-6">
+        <time datetime={pubDate.toISOString()}>
+          {formattedDate}
+        </time>
+      </div>
+      
+      {tags.length > 0 && (
+        <div class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <span class="px-3 py-1 text-sm bg-dark-700 text-electric-400 rounded-full border border-dark-600">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+    
+    <!-- Content -->
+    <div class="prose prose-invert prose-lg max-w-none
+      prose-headings:text-gray-100
+      prose-p:text-gray-300
+      prose-a:text-electric-400 hover:prose-a:text-electric-300
+      prose-code:text-electric-300 prose-code:bg-dark-700 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+      prose-pre:bg-dark-800 prose-pre:border prose-pre:border-dark-600
+      prose-img:rounded-lg prose-img:border prose-img:border-dark-600
+      prose-strong:text-gray-100
+      prose-li:text-gray-300
+      prose-blockquote:border-l-electric-400 prose-blockquote:text-gray-400
+    ">
+      <slot />
+    </div>
+    
+    <!-- Footer Navigation -->
+    {(prevPost || nextPost) && (
+      <footer class="mt-16 pt-8 border-t border-dark-700">
+        <nav class="flex flex-col sm:flex-row justify-between gap-4">
+          {prevPost && (
+            <a
+              href={`/blog/${prevPost.slug}`}
+              class="group flex-1 p-4 rounded-lg bg-dark-800 border border-dark-600 hover:border-electric-500 transition-colors"
+            >
+              <span class="text-sm text-gray-500 block mb-1">&larr; Anterior</span>
+              <span class="text-gray-100 group-hover:text-electric-400 transition-colors">
+                {prevPost.title}
+              </span>
+            </a>
+          )}
+          
+          {nextPost && (
+            <a
+              href={`/blog/${nextPost.slug}`}
+              class="group flex-1 p-4 rounded-lg bg-dark-800 border border-dark-600 hover:border-electric-500 transition-colors text-right"
+            >
+              <span class="text-sm text-gray-500 block mb-1">Siguiente &rarr;</span>
+              <span class="text-gray-100 group-hover:text-electric-400 transition-colors">
+                {nextPost.title}
+              </span>
+            </a>
+          )}
+        </nav>
+      </footer>
+    )}
+  </article>
+</BaseLayout>

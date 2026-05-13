@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================
+   CSS Variables - Dark Theme
+   ======================================== */
+:root {
+  --color-electric: #00D4FF;
+  --color-tech: #8B5CF6;
+  --color-dark-950: #0a0a0f;
+  --color-dark-900: #0d0d14;
+  --color-dark-800: #12121c;
+  --color-dark-700: #1a1a28;
+}
+
+/* ========================================
+   Base Styles
+   ======================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-dark-950);
+  background-image:
+    linear-gradient(to right, rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    radial-gradient(circle at 25% 25%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(0, 212, 255, 0.08) 0%, transparent 50%);
+  background-size: 20px 20px, 20px 20px, 100% 100%, 100% 100%;
+  background-attachment: fixed;
+}
+
+/* ========================================
+   Pixel Art Accents
+   ======================================== */
+.pixel-border {
+  position: relative;
+}
+
+.pixel-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--color-electric), var(--color-tech));
+  z-index: -1;
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0,
+    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  );
+}
+
+.pixel-corner {
+  position: relative;
+}
+
+.pixel-corner::before,
+.pixel-corner::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--color-electric);
+}
+
+.pixel-corner::before {
+  top: 0;
+  left: 0;
+  box-shadow:
+    8px 0 0 var(--color-electric),
+    0 8px 0 var(--color-electric),
+    8px 8px 0 var(--color-tech);
+}
+
+.pixel-corner::after {
+  bottom: 0;
+  right: 0;
+  box-shadow:
+    -8px 0 0 var(--color-electric),
+    0 -8px 0 var(--color-electric),
+    -8px -8px 0 var(--color-tech);
+}
+
+/* ========================================
+   Glow Effects
+   ======================================== */
+.glow-electric {
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.glow-tech {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+.text-glow-electric {
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+/* ========================================
+   Animations
+   ======================================== */
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ========================================
+   Typography Utilities
+   ======================================== */
+.font-pixel {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+}
+
+/* ========================================
+   Component Utilities
+   ======================================== */
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-electric-500 text-dark-950 font-semibold rounded-lg
+           hover:bg-electric-400 transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-electric-400 focus:ring-offset-2 focus:ring-offset-dark-950;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-3 border-2 border-electric-400 text-electric-400 font-semibold rounded-lg
+           hover:bg-electric-400 hover:text-dark-950 transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-electric-400 focus:ring-offset-2 focus:ring-offset-dark-950;
+  }
+  
+  .card {
+    @apply bg-dark-800 border border-dark-600 rounded-xl p-6
+           hover:border-electric-500/50 transition-all duration-300;
+  }
+  
+  .container-custom {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* ========================================
+   Custom Scrollbar
+   ======================================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-dark-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-dark-700);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-electric);
+}
+
+/* ========================================
+   Selection
+   ======================================== */
+::selection {
+  background: rgba(0, 212, 255, 0.3);
+  color: #fff;
+}

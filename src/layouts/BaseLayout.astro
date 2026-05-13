@@ -1,0 +1,68 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = "Vanima - Desarrollo de software a medida, sitios web y soluciones DevOps/MLOps",
+  ogImage = "/og-image.png",
+} = Astro.props;
+
+const siteTitle = `${title} | Vanima`;
+---
+
+<!doctype html>
+<html lang="es" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={siteTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{siteTitle}</title>
+    
+    <!-- View Transitions -->
+    <meta name="view-transition" content="same-origin" />
+  </head>
+  <body class="bg-dark-950 text-gray-100 font-sans antialiased">
+    <Navigation />
+    
+    <main>
+      <slot />
+    </main>
+    
+    <footer class="py-8 border-t border-dark-700">
+      <div class="container mx-auto px-4 text-center text-gray-500">
+        <p>&copy; {new Date().getFullYear()} Vanima. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>
+
+<script>
+  import { navigate } from 'astro:transitions/client';
+  
+  // Handle ViewTransitions
+  document.addEventListener('astro:page-load', () => {
+    // Page loaded with ViewTransitions
+  });
+</script>

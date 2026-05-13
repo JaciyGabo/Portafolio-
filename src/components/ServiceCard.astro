@@ -1,0 +1,50 @@
+---
+interface Props {
+  icon: 'web' | 'custom' | 'devops';
+  title: string;
+  description: string;
+}
+
+const { icon, title, description } = Astro.props;
+
+const icons = {
+  web: {
+    svg: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+    </svg>`,
+    gradient: 'from-electric-400 to-electric-600',
+  },
+  custom: {
+    svg: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+    </svg>`,
+    gradient: 'from-tech-400 to-tech-600',
+  },
+  devops: {
+    svg: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+    </svg>`,
+    gradient: 'from-electric-400 to-tech-400',
+  },
+};
+
+const iconData = icons[icon];
+---
+
+<article class="card group cursor-default">
+  <!-- Icon -->
+  <div class={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${iconData.gradient} mb-6 glow-electric group-hover:scale-110 transition-transform duration-300`}>
+    <Fragment set:html={iconData.svg} />
+  </div>
+  
+  <!-- Content -->
+  <h3 class="text-xl font-semibold text-gray-100 mb-3 group-hover:text-electric-400 transition-colors">
+    {title}
+  </h3>
+  <p class="text-gray-400 leading-relaxed">
+    {description}
+  </p>
+  
+  <!-- Accent line -->
+  <div class="mt-6 h-1 w-0 bg-gradient-to-r from-electric-400 to-tech-400 group-hover:w-full transition-all duration-500 rounded-full"></div>
+</article>
