@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const formattedDate = (date: Date) => {
+  return date.toLocaleDateString('es-ES', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+---
+
+<BaseLayout title="Blog" description="Artículos sobre MLOps, DevOps, desarrollo de software y más.">
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="bg-gradient-to-r from-electric-400 to-tech-400 bg-clip-text text-transparent">
+            Blog
+          </span>
+        </h1>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+          Artículos sobre desarrollo de software, MLOps, DevOps y tecnología en general.
+        </p>
+      </div>
+
+      {sortedPosts.length === 0 ? (
+        <div class="text-center py-12">
+          <p class="text-gray-500 text-lg">No hay artículos publicados todavía.</p>
+        </div>
+      ) : (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {sortedPosts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="group block">
+              <article class="card h-full flex flex-col">
+                <!-- Date -->
+                <div class="text-sm text-gray-500 mb-3">
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {formattedDate(post.data.pubDate)}
+                  </time>
+                </div>
+
+                <!-- Title -->
+                <h2 class="text-xl font-semibold text-gray-100 mb-3 group-hover:text-electric-400 transition-colors">
+                  {post.data.title}
+                </h2>
+
+                <!-- Description -->
+                <p class="text-gray-400 text-sm mb-4 flex-grow">
+                  {post.data.description}
+                </p>
+
+                <!-- Tags -->
+                {post.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2 mt-auto">
+                    {post.data.tags.slice(0, 4).map((tag) => (
+                      <span class="px-2 py-1 text-xs font-mono text-electric-400 bg-dark-700 rounded">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </article>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

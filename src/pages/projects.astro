@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+const sortedProjects = projects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout
+  title="Proyectos"
+  description="Portafolio de proyectos de desarrollo, MLOps y DevOps."
+>
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="bg-gradient-to-r from-electric-400 to-tech-400 bg-clip-text text-transparent">
+            Proyectos
+          </span>
+        </h1>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+          Una colección de proyectos que demuestran mi experiencia en desarrollo de software,
+          arquitectura MLOps y automatización DevOps.
+        </p>
+      </div>
+
+      {sortedProjects.length === 0 ? (
+        <div class="text-center py-12">
+          <p class="text-gray-500 text-lg">No hay proyectos publicados todavía.</p>
+        </div>
+      ) : (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {sortedProjects.map((project) => (
+            <ProjectCard
+              title={project.data.title}
+              description={project.data.description}
+              thumbnail={project.data.image || '/images/placeholder.jpg'}
+              tags={project.data.tags}
+              slug={project.slug}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

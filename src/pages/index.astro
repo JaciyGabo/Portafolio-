@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { services } from '../data/services';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+const featuredProjects = projects.slice(0, 6);
+
+// Map services to the icon type expected by ServiceCard
+const serviceIconMap: Record<string, 'web' | 'custom' | 'devops'> = {
+  'desarrollo-software': 'custom',
+  'sitios-web': 'web',
+  'mlops-devops': 'devops',
+};
+---
+
+<BaseLayout title="Home">
+  <!-- Hero Section -->
+  <Hero />
+
+  <!-- Services Section -->
+  <section class="py-20 bg-dark-900/50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          <span class="bg-gradient-to-r from-electric-400 to-tech-400 bg-clip-text text-transparent">
+            Servicios
+          </span>
+        </h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+          Soluciones tecnológicas adaptadas a tus necesidades, desde desarrollo web hasta arquitecturas MLOps.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {services.map((service) => (
+          <ServiceCard
+            icon={serviceIconMap[service.id] || 'custom'}
+            title={service.title}
+            description={service.description}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects Section -->
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          <span class="bg-gradient-to-r from-electric-400 to-tech-400 bg-clip-text text-transparent">
+            Proyectos Destacados
+          </span>
+        </h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+          Una selección de proyectos que demuestran mi experiencia en desarrollo, MLOps y DevOps.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {featuredProjects.map((project) => (
+          <ProjectCard
+            title={project.data.title}
+            description={project.data.description}
+            thumbnail={project.data.image || '/images/placeholder.jpg'}
+            tags={project.data.tags}
+            slug={project.slug}
+          />
+        ))}
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="/proyectos" class="btn-secondary inline-flex items-center gap-2">
+          Ver todos los proyectos
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-dark-900/50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+          ¿Tienes un proyecto en mente?
+        </h2>
+        <p class="text-gray-400 text-lg mb-8">
+          Hablemos sobre cómo puedo ayudarte a transformar tu idea en realidad.
+        </p>
+        <a href="/contacto" class="btn-primary inline-flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Contáctame
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
