@@ -1,0 +1,6 @@
+# Robots.txt for Vanima Portfolio
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://vanima.dev/sitemap-0.xml
