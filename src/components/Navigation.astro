@@ -4,7 +4,7 @@ const navLinks = [
   { href: '/blog', label: 'Blog' },
   { href: '/proyectos', label: 'Proyectos' },
   { href: '/servicios', label: 'Servicios' },
-  { href: 'mailto:vanima.devs@gmail.com', label: 'Contacto' },
+  { href: '/contacto', label: 'Contacto' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -49,7 +49,7 @@ function isActive(href: string): boolean {
       
       <!-- CTA Button (Desktop) -->
       <div class="hidden md:flex items-center gap-4">
-        <a href="mailto:vanima.devs@gmail.com" class="btn-primary text-sm py-2">
+        <a href="/contacto" class="btn-primary text-sm py-2">
           Hablemos
         </a>
       </div>
@@ -84,7 +84,7 @@ function isActive(href: string): boolean {
             {link.label}
           </a>
         ))}
-        <a href="mailto:vanima.devs@gmail.com" class="btn-primary text-center mt-2">
+        <a href="/contacto" class="btn-primary text-center mt-2">
           Hablemos
         </a>
       </div>
