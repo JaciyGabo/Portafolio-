@@ -4,9 +4,8 @@ export const profile = {
   focus: 'IA / DevOps',
   description: 'Construyendo soluciones inteligentes con enfoque en Machine Learning y automatización DevOps.',
   social: {
-    github: 'https://github.com',
-    linkedin: 'https://linkedin.com',
-    twitter: 'https://twitter.com'
+    github: 'https://github.com/JaciyGabo',
+    linkedin: 'https://linkedin.com/in/jacielquiroga'
   },
   email: 'vanima.devs@gmail.com'
 }
