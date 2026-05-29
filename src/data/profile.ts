@@ -8,5 +8,5 @@ export const profile = {
     linkedin: 'https://linkedin.com',
     twitter: 'https://twitter.com'
   },
-  email: 'hello@vanima.dev'
+  email: 'vanima.devs@gmail.com'
 }
